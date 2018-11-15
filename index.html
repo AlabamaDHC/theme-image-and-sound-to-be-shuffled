@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.0/image-picker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+</head>
+
+<style>
+#video-place-holder {
+    margin-top: 3.75rem;
+}
+
+#player-col {
+    margin-top: 5rem;
+}
+
+#image-title{
+    text-align: right;
+}
+
+#sound-title{
+    text-align: left;
+}
+
+.card-title {
+    color: white;
+}
+
+button {
+    margin-top: 1.75rem;
+}
+
+.image_picker_selector:before {
+    background: rgba(0,255,255, 0.5);
+}
+
+.svg-container {margin-left: 2rem;}
+
+#video-frame-container{
+    margin-top: 10vh;
+}
+
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background: #8080808f; /* #808080; */
+    border-top: solid #909090 2px;
+    color: #fff;
+    text-align: center;
+}
+
+footer a {
+    color: #fff;
+}
+
+.logo {
+    margin-left: 2rem;
+}
+
+.badge-the-last-night { color: #fff; background-color: #374e7b; }
+.badge-against { color: #fff; background-color: #daae89; }
+.badge-the-night { color: #fff; background-color: #7f8ba3; }
+.badge-sleep { color: #fff; background-color: #8a8f94; }
+.badge-talking { color: #fff; background-color: #000000; }
+.badge-lavender { color: #fff; background-color: #7a412f; }
+
+.badge-of-the-world { color: #fff; background-color: #374e7b; }
+.badge-which { color: #fff; background-color: #daae89; }
+.badge-is-now-half-gone { color: #fff; background-color: #7f8ba3; }
+.badge-over { color: #fff; background-color: #8a8f94; }
+.badge-with-jim { color: #fff; background-color: #000000; }
+.badge-cigarette { color: #fff; background-color: #7a412f; }
+
+.row.vdivide [class*='col-']:not(:last-child):after {
+  background: #e0e0e0;
+  width: 1px;
+  content: "";
+  display:block;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  right: 0;
+  min-height: 70px;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+.btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+}
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 35px;
+}
+
+#shuffle-btn-row {
+    margin-top: 3rem;
+}
+
+#shuffle-btn {
+    margin-top: 0px;
+}
+
+</style>
+
+<body>
+<div class="container-flex">
+    <div class="row">
+        <div id="video-col" class="col-2 text-center">
+            <h4 class="text-muted">Image</h4>
+            <select id="video-select" class="image-picker show-html">
+                <option data-img-src="posters/image/the-last-night.jpg" value="1">The Last Night</option>
+                <option data-img-src="posters/image/against.jpg" value="2">Against</option>
+                <option data-img-src="posters/image/the-night.jpg" value="3">The Night</option>
+                <option data-img-src="posters/image/sleep.jpg" value="4">Sleep</option>
+                <option data-img-src="posters/image/talking.jpg" value="5">Talking</option>
+                <option data-img-src="posters/image/lavender.jpg" value="6">Lavender</option>
+            </select>
+        </div>
+
+        <div id="player-col" class="col-8 text-center border">
+            <div class="row vdivide align-middle">
+
+                <div class="col-sm-6 text-center">
+                    <h1 id="image-title">
+                        <span class="badge badge-pill badge-the-last-night">The Last Night</span>
+                    </h1>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <h1 id="sound-title">
+                        <span class="badge badge-pill badge-of-the-world">Of The World</span>
+                    </h1>
+                </div>
+
+                <h1 id="video-title" class="d-none">The Last Night | Of The World</h1>
+                <h1 id="video-title" class=""></h1>
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="video-frame-container" style="padding:56.25% 0 0 0; position:relative; margin-top: 0px;">
+                        <iframe id="video-frame" src="https://player.vimeo.com/video/270438115?autoplay=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div id="shuffle-btn-row" class="row">
+                <div class="col-12">
+                    <h5 class="text-muted">Shuffle</h5>
+                </div>
+                <div class="col-12">
+                    <button id="shuffle-btn" type="button" class="btn btn-primary btn-circle btn-xl "><i class="oi oi-loop-circular"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="audio-col" class="col-2 text-center">
+            <h4 class="text-muted">Sound</h4>
+            <select id="audio-select" class="image-picker show-html">
+                <option data-img-src="posters/sound/of-the-world.jpg" value="7">Of The World</option>
+                <option data-img-src="posters/sound/which.jpg" value="8">Which</option>
+                <option data-img-src="posters/sound/is-now-half-gone.jpg" value="9">Is Now Half Gone</option>
+                <option data-img-src="posters/sound/over.jpg" value="10">Over</option>
+                <option data-img-src="posters/sound/with-jim.jpg" value="11">With Jim</option>
+                <option data-img-src="posters/sound/cigarette.jpg" value="12">Cigarette</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div class="container center-block">
+
+        <div class="logo-container">
+            <img class="logo" width="100px" id="footer-adhc-logo" src="https://alabama.box.com/shared/static/rrz800hrp7h5crt74rorawa8ihagu8eb.png">
+            <img class="logo" width="200px" src="https://adhc.lib.ua.edu/gage/wp-content/themes/gage-timber/static/as-white-logo.png">
+            <img class="logo" width="170px" src="https://www.lib.ua.edu/wp-content/themes/roots-ualib/assets/img/new-ualib-logo.png">
+        </div>
+
+        <div class="ua-disclaimers">
+            <a href="http://www.ua.edu/">University of Alabama</a>
+            •
+            <a href="http://www.as.ua.edu/">College of Arts &amp; Sciences</a>
+            •
+            <a href="http://www.lib.ua.edu/">University Libraries</a>
+            •
+            <a href="http://www.ua.edu/disclaimer.html">Disclaimer</a>
+            •
+            <a href="http://www.ua.edu/privacy.html">Privacy</a>
+            •
+            <a href=" http://www.ua.edu/copyright.html">Copyright</a>
+        </div>
+        Copyright 2018
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.0/image-picker.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+
+$.fn.extend({
+  animateCss: function(animationName, callback) {
+    var animationEnd = (function(el) {
+      var animations = {
+        animation: 'animationend',
+        OAnimation: 'oAnimationEnd',
+        MozAnimation: 'mozAnimationEnd',
+        WebkitAnimation: 'webkitAnimationEnd',
+      };
+
+      for (var t in animations) {
+        if (el.style[t] !== undefined) {
+          return animations[t];
+        }
+      }
+    })(document.createElement('div'));
+
+    this.addClass('animated ' + animationName).one(animationEnd, function() {
+      $(this).removeClass('animated ' + animationName);
+
+      if (typeof callback === 'function') callback();
+    });
+
+    return this;
+  },
+});
+
+function changeVideo() {
+    $( document ).ready(function() {
+        var video = $( "#video-select" ).val();
+        var audio = $( "#audio-select" ).val();
+
+        var video_name = $("#video-select option:selected").text();
+        var sound_name = $("#audio-select option:selected").text();
+
+        var video_class = video_name.toLowerCase().replace(' ', '-').replace(' ', '-').replace(' ', '-');
+        var sound_class = sound_name.toLowerCase().replace(' ', '-').replace(' ', '-').replace(' ', '-');
+
+        console.log( video );
+        console.log( audio );
+
+        console.log( video_name );
+        console.log( sound_name );
+
+        $( "#video-title" ).text(video_name + ' | ' + sound_name);
+
+        $( "#image-title" ).empty();
+        $( "#image-title" ).append('<span class="badge badge-pill badge-'+video_class+'">'+video_name+'</span>');
+
+        $( "#sound-title" ).empty();
+        $( "#sound-title" ).append('<span class="badge badge-pill badge-'+sound_class+'">'+sound_name+'</span>');
+
+
+        //Video: The Last Night
+        if (video == 1){
+           $( "#video-frame" ).attr('poster', 'video/posters/image/the-last-night.jpg');
+
+           //Audio: Of The World
+           if (audio == 7){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270438115?autoplay=1&title=0&byline=0&portrait=0'); }
+
+           //Audio: Which
+           if (audio == 8){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437979?autoplay=1&title=0&byline=0&portrait=0'); }
+
+           //Audio: Is Now Half
+           if (audio == 9){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437920?autoplay=1&title=0&byline=0&portrait=0'); }
+
+           //Audio: Over
+           if (audio == 10){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437878?autoplay=1&title=0&byline=0&portrait=0'); }
+
+           //Audio: With Jim
+           if (audio == 11){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437860?autoplay=1&title=0&byline=0&portrait=0'); }
+
+           //Audio: cigarette
+           if (audio == 12){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436203?autoplay=1&title=0&byline=0&portrait=0'); }
+        }
+        //Video: Against
+        if (video == 2){
+            $( "#video-frame" ).attr('poster', 'video/posters/image/against.jpg');
+
+            //Audio: Of The World
+            if (audio == 7){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437747?autoplay=1&title=0&byline=0&portrait=0');  }
+
+            //Audio: Which
+            if (audio == 8){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270438054?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Is Now Half
+            if (audio == 9){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437706?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Over
+            if (audio == 10){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437604?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: With Jim
+            if (audio == 11){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437543?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Cigarette
+            if (audio == 12){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436147?autoplay=1&title=0&byline=0&portrait=0'); }
+        }
+
+        //Video: The Night
+        if (video == 3){
+           $( "#video-frame" ).attr('poster', 'video/posters/image/the-night.jpg');
+
+           //Audio: Of The World
+           if (audio == 7){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437473?autoplay=1&title=0&byline=0&portrait=0'); }
+
+           //Audio: Which
+           if (audio == 8){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437410?autoplay=1&title=0&byline=0&portrait=0'); }
+
+           //Audio: Is Now Half
+           if (audio == 9){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437343?autoplay=1&title=0&byline=0&portrait=0'); }
+
+           //Audio: Over
+           if (audio == 10){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437298?autoplay=1&title=0&byline=0&portrait=0'); }
+
+           //Audio: With Jim
+           if (audio == 11){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437244?autoplay=1&title=0&byline=0&portrait=0'); }
+
+           //Audio: Cigarette
+           if (audio == 12){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436086?autoplay=1&title=0&byline=0&portrait=0'); }
+        }
+
+       //Video: Sleep
+        if (video == 4){
+          $( "#video-frame" ).attr('poster', 'video/posters/image/sleep.jpg');
+
+          //Audio: Of The World
+          if (audio == 7){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437178?autoplay=1&title=0&byline=0&portrait=0'); }
+
+          //Audio: Which
+          if (audio == 8){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437092?autoplay=1&title=0&byline=0&portrait=0'); }
+
+          //Audio: Is Now Half
+          if (audio == 9){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270437026?autoplay=1&title=0&byline=0&portrait=0'); }
+
+          //Audio: Over
+          if (audio == 10){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436960?autoplay=1&title=0&byline=0&portrait=0'); }
+
+          //Audio: With Jim
+          if (audio == 11){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436872?autoplay=1&title=0&byline=0&portrait=0'); }
+
+          //Audio: Cigarette
+          if (audio == 12){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436036?autoplay=1&title=0&byline=0&portrait=0'); }
+        }
+
+        //Video: Talking
+        if (video == 5){
+            $( "#video-frame" ).attr('poster', 'video/posters/image/talking.jpg');
+
+            //Audio: Of The World
+            if (audio == 7){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436821?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Which
+            if (audio == 8){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436766?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Is Now Half
+            if (audio == 9){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436696?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Over
+            if (audio == 10){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436630?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: With Jim
+            if (audio == 11){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436570?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Cigarette
+            if (audio == 12){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270435971?autoplay=1&title=0&byline=0&portrait=0'); }
+        }
+
+        //Video: Lavender
+        if (video == 6){
+            $( "#video-frame" ).attr('poster', 'video/posters/image/lavender.jpg');
+
+            //Audio: Of The World
+            if (audio == 7){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436540?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Which
+            if (audio == 8){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436527?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Is Now Half
+            if (audio == 9){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436406?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Over
+            if (audio == 10){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436356?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: With Jim
+            if (audio == 11){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270436256?autoplay=1&title=0&byline=0&portrait=0'); }
+
+            //Audio: Cigarette
+            if (audio == 12){ $( "#video-frame" ).attr('src', 'https://player.vimeo.com/video/270435867?autoplay=1&title=0&byline=0&portrait=0'); }
+        }
+
+    });
+}
+
+
+$( document ).ready(function() {
+    $("#video-select").imagepicker();
+    $("#audio-select").imagepicker();
+
+    $(".thumbnail").addClass('card');
+
+    $(".image_picker_image").addClass('img-fluid mx-auto d-block card-img');
+
+    $("#video-select option").each(function(index) {
+        var name = $(this).text();
+        var thumbnail = $('img[src$="'+$(this).attr("data-img-src")+'"]');
+        var thumbnail_parent = thumbnail.parent();
+        thumbnail_parent.append('<div class="card-img-overlay"><h5 class="card-title">'+name+'</h5></div>');
+    });
+
+    $("#audio-select option").each(function(index) {
+        var name = $(this).text();
+        var thumbnail = $('img[src$="'+$(this).attr("data-img-src")+'"]');
+        var thumbnail_parent = thumbnail.parent();
+        thumbnail_parent.append('<div class="card-img-overlay"><h5 class="card-title">'+name+'</h5></div>');
+    });
+
+    $("#shuffle-btn").click(function(index) {
+        $('#player-col').animateCss('jello');
+
+        var video_rand = Math.floor(Math.random() * 6) + 1;
+        var audio_rand = Math.floor(Math.random() * 6) + 7;
+
+        $("#video-select").val( video_rand );
+        $("#audio-select").val( audio_rand );
+
+        $("#video-select").data('picker').sync_picker_with_select();
+        $("#audio-select").data('picker').sync_picker_with_select();
+
+        changeVideo();
+    });
+
+    $( "select" ).change(function() {
+        changeVideo();
+    });
+
+});
+</script>
+</body>
+
+</html>

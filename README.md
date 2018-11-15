@@ -1,0 +1,1 @@
+Just a static site. No wordpress this time.
